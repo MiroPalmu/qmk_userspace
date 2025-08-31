@@ -127,9 +127,9 @@ bool display_module_housekeeping_task_user(bool second_display) {
             if (critically_low(hunger)) { draw_bar_outline(2, hunger_color); }
         }
 
-        drain_stat(&thirst, elapsed_time, 0.3 * min);
-        drain_stat(&fatigue, elapsed_time, 0.4 * min);
-        drain_stat(&hunger, elapsed_time, 0.2 * min);
+        drain_stat(&thirst, elapsed_time, 20 * min);
+        drain_stat(&fatigue, elapsed_time, 45 * min);
+        drain_stat(&hunger, elapsed_time, 3 * 60 * min);
 
         // Move surface to lcd, this actually writes the content to the physical display.
         qp_surface_draw(lcd_surface, lcd, 0, 0, 0);
