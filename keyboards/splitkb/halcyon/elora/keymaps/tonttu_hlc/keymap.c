@@ -15,6 +15,27 @@ enum layers {
 #define QWERTY_EXT MO(_QWERTY_EXT)
 #define ADJUST    MO(_ADJUST)
 
+enum custom_keycodes {
+    THIRST = SAFE_RANGE,
+    FATIGUE,
+    HUNGER,
+};
+
+void reset_thirst(void);
+void reset_fatigue(void);
+void reset_hunger(void);
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (!record->event.pressed) { return true; }
+
+    switch (keycode) {
+    case THIRST: reset_thirst(); break;
+    case FATIGUE: reset_fatigue(); break;
+    case HUNGER: reset_hunger(); break;
+    }
+    return true;
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -77,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_ADJUST] = LAYOUT_elora_hlc(
-      _______, _______, _______, _______, _______, _______,                                    MS_ACL0, MS_ACL1, MS_ACL2, _______, _______, _______,
+      _______,  THIRST, FATIGUE,  HUNGER, _______, _______,                                    MS_ACL0, MS_ACL1, MS_ACL2, _______, _______, _______,
       _______, _______, _______, _______, _______, _______,                                    _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______,                                    RM_TOGG, RM_SATU, RM_HUEU, RM_VALU, RM_NEXT, _______,
       _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV, _______,

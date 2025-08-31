@@ -12,6 +12,16 @@ static STAT_TYPE thirst;
 static STAT_TYPE fatigue;
 static STAT_TYPE hunger;
 
+void reset_thirst(void) {
+    thirst = MAX_STAT_TYPE;
+}
+void reset_fatigue(void) {
+    fatigue = MAX_STAT_TYPE;
+}
+void reset_hunger(void) {
+    hunger = MAX_STAT_TYPE;
+}
+
 struct color_t {
     uint8_t hue, sat, val;
 };
@@ -24,9 +34,9 @@ static const uint32_t min = 60 * 1000;
 
 /// This function is ran on bootup of the keyboard.
 bool module_post_init_user(void) {
-    thirst = MAX_STAT_TYPE;
-    fatigue = MAX_STAT_TYPE;
-    hunger = MAX_STAT_TYPE;
+    reset_thirst();
+    reset_fatigue();
+    reset_hunger();
     return false;
 }
 
